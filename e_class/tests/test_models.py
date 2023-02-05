@@ -30,3 +30,4 @@ class UsersTestCase(TestCase):
                                     email='test@test',
                                     userType=1)
         self.assertEqual(user.password, '')
+        
