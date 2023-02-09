@@ -9,6 +9,7 @@ class UsersTestCase(TestCase):
                              email='test@test',
                              password='123456',
                              userType=1)
+
     def test_user_name_blank(self):
         """Testa se o nome de usuário está vazio"""
         user = Users.objects.create(email='test@test',
@@ -30,4 +31,3 @@ class UsersTestCase(TestCase):
                                     email='test@test',
                                     userType=1)
         self.assertEqual(user.password, '')
-        
