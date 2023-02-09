@@ -23,10 +23,6 @@ class UsersTestCase(TestCase):
                                     password='123456',
                                     userType=1)
         self.assertEqual(user.email, '')
-<<<<<<< HEAD
-=======
-            
->>>>>>> main
 
     def test_user_password_blank(self):
         """Testa se a senha de usuário está vazia"""

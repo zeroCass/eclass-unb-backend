@@ -8,7 +8,6 @@ from .serializer import UsersSerializer
 #from rest_framework.authtoken.views import Token
 #from django.contrib.auth.models import User
 
-<<<<<<< HEAD
 class UserViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UsersSerializer
@@ -23,8 +22,3 @@ class UserViewSet(viewsets.ModelViewSet):
     #     user = User.objects.create_user(**validated_data)
     #     Token.objects.create(user=user)
     #     return user
-=======
-def index(request):
-    return render("Hello, world. You're at the polls index.")
-
->>>>>>> main
