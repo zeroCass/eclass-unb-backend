@@ -1,6 +1,10 @@
-from django.conf.urls import url
-from . import views
+from django.urls import path, include #type:ignore
+from .views import UserViewSet
+from rest_framework.routers import DefaultRouter #type:ignore
+
+router = DefaultRouter()
+router.register('users', UserViewSet, basename='users')
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    path('', include(router.urls)),
 ]

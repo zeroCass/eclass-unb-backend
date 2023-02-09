@@ -1,13 +1,14 @@
-from django.test import TestCase
+from django.test import TestCase #type:ignore
 from e_class.models import Users
 
+"""teste da tabela usuário"""
 class UsersTestCase(TestCase):
+    "testando usuário "
     def setUp(self):
         Users.objects.create(name='test',
                              email='test@test',
                              password='123456',
                              userType=1)
-        
     def test_user_name_blank(self):
         """Testa se o nome de usuário está vazio"""
         user = Users.objects.create(email='test@test',
@@ -21,8 +22,7 @@ class UsersTestCase(TestCase):
         user = Users.objects.create(name='test',
                                     password='123456',
                                     userType=1)
-        self.assertEqual(user.email, ''):
-            
+        self.assertEqual(user.email, '')
 
     def test_user_password_blank(self):
         """Testa se a senha de usuário está vazia"""
