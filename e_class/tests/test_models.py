@@ -1,5 +1,5 @@
 from django.test import TestCase #type:ignore
-from e_class.models import Users, Students
+from e_class.models import Users, Students, Teachers
 
 """teste todas as tabelas do bd"""
 class ClassTestCase(TestCase):
@@ -46,7 +46,8 @@ class ClassTestCase(TestCase):
         Students.objects.create(Users_registrationID=User)
 
     def test_Student_id_fk(self):
-        """Testa se a chave estrangeira do estudante é 5"""
+        """Testa se a chave estrangeira do estudante 
+        é igual a chave primária de usuário"""
         User = Users.objects.create(name='test',
                              email='test@test',
                              password='123456',
@@ -67,10 +68,21 @@ class ClassTestCase(TestCase):
         Teachers.objects.create(Users_registrationID=User)
 
     def test_Teachers_id_fk(self):
-        """Testa se a chave estrangeira do professor é 5"""
+        """Testa se a chave estrangeira do professor é 
+        igual a chave primária de usuário"""
         User = Users.objects.create(name='test',
                              email='test@test',
                              password='123456',
                              userType=1)
         Teacher = Teachers.objects.create(Users_registrationID=User)
-        self.assertEqual(Teachers.Users_registrationID.id, 2)
+        self.assertEqual(Teacher.Users_registrationID.id, 2)
+
+    def test_Teachers_specialization_blank(self):
+            """Testa se a especialização está vazia"""
+            User = Users.objects.create(name='test',
+                                email='test@test',
+                                password='123456',
+                                userType=1)
+            Teacher = Teachers.objects.create(Users_registrationID=User)
+            self.assertEqual(Teacher.specialization, '')
+            
