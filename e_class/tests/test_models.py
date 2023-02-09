@@ -21,7 +21,7 @@ class UsersTestCase(TestCase):
         user = Users.objects.create(name='test',
                                     password='123456',
                                     userType=1)
-        self.assertEqual(user.email, ''):
+        self.assertEqual(user.email, '')
             
 
     def test_user_password_blank(self):
