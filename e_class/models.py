@@ -16,3 +16,13 @@ class Users(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+class Students(models.Model):
+    'Estudantes'
+    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.Users_registrationID
+
+    class Meta:
+        ordering = ['Users_registrationID']

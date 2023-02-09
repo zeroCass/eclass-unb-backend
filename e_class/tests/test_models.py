@@ -50,7 +50,6 @@ class ClassTestCase(TestCase):
         User = Users.objects.create(name='test',
                              email='test@test',
                              password='123456',
-                             userType=1,
-                             id=1)
+                             userType=1)
         Student = Students.objects.create(Users_registrationID=User)
-        self.assertEqual(Student.Users_registrationID, 1)
+        self.assertEqual(Student.Users_registrationID.id, 1)
