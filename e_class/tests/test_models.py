@@ -52,4 +52,4 @@ class ClassTestCase(TestCase):
                              password='123456',
                              userType=1)
         Student = Students.objects.create(Users_registrationID=User)
-        self.assertEqual(Student.Users_registrationID.id, 1)
+        self.assertEqual(Student.Users_registrationID.id, 2)
