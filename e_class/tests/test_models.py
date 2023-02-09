@@ -65,7 +65,8 @@ class ClassTestCase(TestCase):
                              userType=1,
                              id=5)
         
-        Teachers.objects.create(Users_registrationID=User)
+        Teachers.objects.create(Users_registrationID=User, 
+                             specialization='test')
 
     def test_Teachers_id_fk(self):
         """Testa se a chave estrangeira do professor é 
@@ -96,7 +97,7 @@ class ClassTestCase(TestCase):
                              userType=1,
                              id=5)
         
-        Students.objects.create(Users_registrationID=User)
+        Admins.objects.create(Users_registrationID=User)
 
     def test_Admins_id_fk(self):
         """Testa se a chave estrangeira do administrador
@@ -107,3 +108,61 @@ class ClassTestCase(TestCase):
                              userType=1)
         Admin = Admins.objects.create(Users_registrationID=User)
         self.assertEqual(Admin.Users_registrationID.id, 2)
+
+#################################################################################################
+
+    """testando tabela matérias"""
+    def setUpSubjects(self):
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1,
+                             id=5)
+
+        Admin = Admins.objects.create(Users_registrationID=User)
+
+        Subjects.objects.create(course='test', 
+                             description='test',
+                             Admins_Users_registrationID=Admin)
+        
+    def test_Subjects_course_blank(self):
+        """Testa se o curso está vazio"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1)
+        Admin = Admins.objects.create(Users_registrationID=User)
+
+        Subject = Subjects.objects.create(description='test',
+                             Admins_Users_registrationID=Admin)
+
+        self.assertEqual(Subject.course, '')
+
+    def test_Subjects_description_blank(self):
+        """Testa se a descrição está vazia"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1)
+        Admin = Admins.objects.create(Users_registrationID=User)
+
+        Subject = Subjects.objects.create(course='test',
+                             Admins_Users_registrationID=Admin)
+
+        self.assertEqual(Subject.description, '')
+
+    def test_Subjects_id_fk(self):
+        """Testa se a chave estrangeira de matérias
+        é igual a chave primária de admin"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1)
+        Admin = Admins.objects.create(Users_registrationID=User)
+
+        Subject = Subjects.objects.create(course='test', 
+                             description='test',
+                             Admins_Users_registrationID=Admin)
+
+        self.assertEqual(Subject.Admins_Users_registrationID.Users_registrationID.id, 2)
+        

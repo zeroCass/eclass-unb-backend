@@ -47,3 +47,15 @@ class Admins(models.Model):
 
     class Meta:
         ordering = ['Users_registrationID']  
+
+class Subjects(models.Model):
+    'Matérias'
+    course = models.CharField(max_length=45, blank=False)
+    description = models.CharField(max_length=200, blank=False)
+    Admins_Users_registrationID = models.ForeignKey(Admins, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.course
+
+    class Meta:
+        ordering = ['course']
