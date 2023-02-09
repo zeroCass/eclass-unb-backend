@@ -37,3 +37,13 @@ class Teachers(models.Model):
 
     class Meta:
         ordering = ['Users_registrationID']
+
+class Admins(models.Model):
+    'Administradores'
+    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.Users_registrationID
+
+    class Meta:
+        ordering = ['Users_registrationID']  

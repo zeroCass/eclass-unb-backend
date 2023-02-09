@@ -86,3 +86,24 @@ class ClassTestCase(TestCase):
             Teacher = Teachers.objects.create(Users_registrationID=User)
             self.assertEqual(Teacher.specialization, '')
             
+#################################################################################################
+
+    """testando tabela administrador"""
+    def setUpAdmins(self):
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1,
+                             id=5)
+        
+        Students.objects.create(Users_registrationID=User)
+
+    def test_Admins_id_fk(self):
+        """Testa se a chave estrangeira do administrador
+        é igual a chave primária de usuário"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1)
+        Admin = Admins.objects.create(Users_registrationID=User)
+        self.assertEqual(Admin.Users_registrationID.id, 2)
