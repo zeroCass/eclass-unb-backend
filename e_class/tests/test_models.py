@@ -1,8 +1,9 @@
 from django.test import TestCase #type:ignore
-from e_class.models import Users
+from e_class.models import Users, Students
 
-"""teste da tabela usuário"""
-class UsersTestCase(TestCase):
+"""teste todas as tabelas do bd"""
+class ClassTestCase(TestCase):
+    """teste da tabela usuário"""
     "testando usuário "
     def setUp(self):
         Users.objects.create(name='test',
@@ -31,3 +32,25 @@ class UsersTestCase(TestCase):
                                     email='test@test',
                                     userType=1)
         self.assertEqual(user.password, '')
+
+#################################################################################################
+
+    """testando tabela estudante"""
+    def setUpStudents(self):
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1,
+                             id=5)
+        
+        Students.objects.create(Users_registrationID=User)
+
+    def test_Student_id_blank(self):
+        """Testa se a chave estrangeira do estudante é 5"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1,
+                             id=1)
+        Student = Students.objects.create(Users_registrationID=User)
+        self.assertEqual(Student.Users_registrationID, 1)
