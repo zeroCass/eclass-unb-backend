@@ -1,5 +1,5 @@
 from django.test import TestCase #type:ignore
-from e_class.models import Users, Students, Teachers, Admins
+from e_class.models import Users, Students, Teachers, Admins, Subjects
 
 """teste todas as tabelas do bd"""
 class ClassTestCase(TestCase):
