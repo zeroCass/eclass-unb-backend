@@ -26,3 +26,14 @@ class Students(models.Model):
 
     class Meta:
         ordering = ['Users_registrationID']
+
+class Teachers(models.Model):
+    'Professores'
+    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    specialization = models.CharField(max_length=45, blank=False)
+
+    def __str__(self):
+        return self.Users_registrationID
+
+    class Meta:
+        ordering = ['Users_registrationID']

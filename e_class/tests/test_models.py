@@ -45,7 +45,7 @@ class ClassTestCase(TestCase):
         
         Students.objects.create(Users_registrationID=User)
 
-    def test_Student_id_blank(self):
+    def test_Student_id_fk(self):
         """Testa se a chave estrangeira do estudante é 5"""
         User = Users.objects.create(name='test',
                              email='test@test',
@@ -53,3 +53,24 @@ class ClassTestCase(TestCase):
                              userType=1)
         Student = Students.objects.create(Users_registrationID=User)
         self.assertEqual(Student.Users_registrationID.id, 2)
+
+#################################################################################################
+    
+    """testando tabela Professor"""    
+    def setUpTeachers(self):
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1,
+                             id=5)
+        
+        Teachers.objects.create(Users_registrationID=User)
+
+    def test_Teachers_id_fk(self):
+        """Testa se a chave estrangeira do professor é 5"""
+        User = Users.objects.create(name='test',
+                             email='test@test',
+                             password='123456',
+                             userType=1)
+        Teacher = Teachers.objects.create(Users_registrationID=User)
+        self.assertEqual(Teachers.Users_registrationID.id, 2)
