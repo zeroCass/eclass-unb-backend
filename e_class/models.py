@@ -1,8 +1,11 @@
-from django.db import models #type:ignore
+from django.db import models  # type:ignore
+
 """Modelos das tabelas do banco de dados"""
 
+
 class Users(models.Model):
-    'Usuários'
+    "Usuários"
+
     class Type(models.IntegerChoices):
         Admins = 1
         Teachers = 2
@@ -17,39 +20,49 @@ class Users(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Students(models.Model):
-    'Estudantes'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    "Estudantes"
+    Users_registrationID = models.OneToOneField(
+        Users, on_delete=models.CASCADE, primary_key=True
+    )
 
     def __str__(self):
         return self.Users_registrationID
 
     class Meta:
-        ordering = ['Users_registrationID']
+        ordering = ["Users_registrationID"]
+
 
 class Teachers(models.Model):
-    'Professores'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    "Professores"
+    Users_registrationID = models.OneToOneField(
+        Users, on_delete=models.CASCADE, primary_key=True
+    )
     specialization = models.CharField(max_length=45, blank=False)
 
     def __str__(self):
         return self.Users_registrationID
 
     class Meta:
-        ordering = ['Users_registrationID']
+        ordering = ["Users_registrationID"]
+
 
 class Admins(models.Model):
-    'Administradores'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    "Administradores"
+    Users_registrationID = models.OneToOneField(
+        Users, on_delete=models.CASCADE, primary_key=True
+    )
 
     def __str__(self):
         return self.Users_registrationID
 
     class Meta:
-        ordering = ['Users_registrationID']  
+        ordering = ["Users_registrationID"]
+
 
 class Subjects(models.Model):
-    'Matérias'
+    "Matérias"
     course = models.CharField(max_length=45, blank=False)
     description = models.CharField(max_length=200, blank=False)
     Admins_Users_registrationID = models.ForeignKey(Admins, on_delete=models.PROTECT)
@@ -58,4 +71,4 @@ class Subjects(models.Model):
         return self.course
 
     class Meta:
-        ordering = ['course']
+        ordering = ["course"]
