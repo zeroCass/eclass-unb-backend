@@ -1,6 +1,6 @@
-from django.urls import path, include #type:ignore
+from django.urls import path, include
 from .views import UserViewSet
-from rest_framework.routers import DefaultRouter #type:ignore
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='users')
