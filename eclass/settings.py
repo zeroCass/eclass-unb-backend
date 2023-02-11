@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'e_class.apps.EClassConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'eclass.urls'
@@ -130,3 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'rest_framework.permissions.IsAuthenticated',
 #     ]
 # }
+
+
+# Cors-policy to allow request from souce
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
