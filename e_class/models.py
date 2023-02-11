@@ -1,5 +1,6 @@
 from django.db import models  # type:ignore
 
+
 class User(models.Model):
     "Usuário"
 
@@ -44,7 +45,7 @@ class Student(User):
 class Subject(models.Model):
     "Materia"
 
-    admin = models.ForeignKey(Admin, on_delete=models.PROTECT)
+    admin = models.ForeignKey(Admin, on_delete=models.SET_NULL, blank=True, null=True)
     teachers = models.ManyToManyField(Teacher)
     course = models.CharField(max_length=45, unique=True)
     description = models.TextField(max_length=200)

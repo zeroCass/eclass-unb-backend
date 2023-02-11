@@ -17,3 +17,8 @@ class AdminsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Admin
         fields = fieldsUser
+
+class SubjectsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = ['id', 'teachers', 'course', 'description']
