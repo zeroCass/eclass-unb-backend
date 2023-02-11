@@ -53,12 +53,14 @@ class Subject(models.Model):
 class Classes(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     students = models.ManyToManyField(Student, through="Students_has_Classes")
+    teachers = models.ManyToManyField(Teacher)
     name = models.CharField(max_length=15)
     size = models.IntegerField()
     startTime = models.DateField()
     endTime = models.DateField()
     period = models.IntegerField()
     password = models.CharField(max_length=30)
+    createdAt = models.DateField(auto_now_add=True)
 
     def __unicode__(self):
         return self.name
