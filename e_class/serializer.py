@@ -1,8 +1,14 @@
 from rest_framework import serializers #type:ignore
-from .models import Student
-from random import randint
+from .models import *
 
-class UsersSerializer(serializers.ModelSerializer):
+fieldsUser = ['id','name','email','password','cpf','userType']
+
+class StudentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['id','name','email','password','cpf','userType']
+        fields = fieldsUser
+
+class TeachersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = fieldsUser
