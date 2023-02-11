@@ -1,61 +1,89 @@
-from django.db import models #type:ignore
-"""Modelos das tabelas do banco de dados"""
+from django.db import models  # type:ignore
 
-class Users(models.Model):
-    'Usuários'
-    class Type(models.IntegerChoices):
-        Admins = 1
-        Teachers = 2
-        Students = 3
 
-    name = models.CharField(max_length=45, blank=False)
-    email = models.EmailField(max_length=254, blank=False)
-    password = models.CharField(max_length=15, blank=False)
-    cpf = models.CharField(max_length=11, blank=False)
-    userType = models.IntegerField(choices=Type.choices, blank=False)
+class User(models.Model):
+    "Usuário"
 
-    def __str__(self):
-        return str(self.name)
+    userTypeChoices = ((1, "Admin"), (2, "Teacher"), (3, "Student"))
 
-class Students(models.Model):
-    'Estudantes'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(max_length=45)
+    email = models.EmailField(max_length=254, unique=True)
+    password = models.CharField(max_length=30)
+    cpf = models.CharField(max_length=11, unique=True)
+    userType = models.IntegerField(choices=userTypeChoices)
 
-    def __str__(self):
-        return self.Users_registrationID
+    def __unicode__(self):
+        return self.name
 
     class Meta:
-        ordering = ['Users_registrationID']
+        abstract = True
 
-class Teachers(models.Model):
-    'Professores'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
-    specialization = models.CharField(max_length=45, blank=False)
 
-    def __str__(self):
-        return self.Users_registrationID
+class Admin(User):
+    "Administrador"
 
     class Meta:
-        ordering = ['Users_registrationID']
+        ordering = ["name"]
 
-class Admins(models.Model):
-    'Administradores'
-    Users_registrationID = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
 
-    def __str__(self):
-        return self.Users_registrationID
+class Teacher(User):
+    "Professor"
+
+    specialization = models.CharField(max_length=45)
 
     class Meta:
-        ordering = ['Users_registrationID']  
+        ordering = ["name"]
 
-class Subjects(models.Model):
-    'Matérias'
-    course = models.CharField(max_length=45, blank=False)
-    description = models.CharField(max_length=200, blank=False)
-    Admins_Users_registrationID = models.ForeignKey(Admins, on_delete=models.PROTECT)
 
-    def __str__(self):
+class Student(User):
+    "Estudante"
+
+    class Meta:
+        ordering = ["name"]
+
+
+class Subject(models.Model):
+    "Materia"
+
+    admin = models.ForeignKey(Admin, on_delete=models.SET_NULL, blank=True, null=True)
+    teachers = models.ManyToManyField(Teacher)
+    course = models.CharField(max_length=45, unique=True)
+    description = models.TextField(max_length=200)
+
+    def __unicode__(self):
         return self.course
 
     class Meta:
-        ordering = ['course']
+        ordering = ["course"]
+
+
+class Classes(models.Model):
+    "Turma"
+
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    students = models.ManyToManyField(Student, through="Students_has_Classes")
+    teachers = models.ManyToManyField(Teacher)
+    name = models.CharField(max_length=15)
+    size = models.IntegerField()
+    startTime = models.DateField()
+    endTime = models.DateField()
+    period = models.IntegerField()
+    password = models.CharField(max_length=30)
+    createdAt = models.DateField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]
+
+
+class Students_has_Classes(models.Model):
+    "Tabela intermedária entre Estudante e Turma"
+
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    classes = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    registerDate = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["registerDate"]

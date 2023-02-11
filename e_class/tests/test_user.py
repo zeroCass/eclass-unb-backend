@@ -1,7 +1,7 @@
 from rest_framework.reverse import reverse #type:ignore
 from rest_framework import status #type:ignore
 from rest_framework.test import APITestCase #type:ignore
-from e_class.models import Users
+from e_class.models import User
 
 import logging
 logger = logging.getLogger(__name__)
@@ -9,18 +9,18 @@ logger = logging.getLogger(__name__)
 class UsersViewSetTestCase(APITestCase):
     def add_test_users(self):
         """
-        Adds a test Users into the database
+        Adds a test User into the database
         """
-        logger.debug('Adding a new Users into database')
-        u = Users(name='Casper', email='casper@gmail.com', password='casper', cpf='31231312322', userType=2)
+        logger.debug('Adding a new User into database')
+        u = User(name='Casper', email='casper@gmail.com', password='casper', cpf='31231312322', userType=2)
         u.save()
-        logger.debug('Successfully added test Users into the database')
+        logger.debug('Successfully added test User into the database')
 
     def test_list_users(self):
         """
         Test to list all the Userss in the list
         """
-        logger.debug('Starting test list Users')
+        logger.debug('Starting test list User')
 
         self.add_test_users()
 
