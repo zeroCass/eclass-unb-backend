@@ -1,7 +1,7 @@
 #from django.shortcuts import render
 #from django.http import HttpResponse
 from rest_framework import viewsets # type: ignore
-from .models import Users
+from .models import Student
 from .serializer import UsersSerializer
 #from random import randint
 #from rest_framework.authentication import TokenAuthentication
@@ -9,7 +9,7 @@ from .serializer import UsersSerializer
 #from django.contrib.auth.models import User
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
+    queryset = Student.objects.all()
     serializer_class = UsersSerializer
     #authentication_classes = (TokenAuthentication,)
 
