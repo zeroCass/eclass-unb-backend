@@ -34,3 +34,7 @@ class AdminsViewSet(viewsets.ModelViewSet):
 class SubjectsViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectsSerializer
+
+class ClassesViewSet(viewsets.ModelViewSet):
+    queryset = Classes.objects.all()
+    serializer_class = ClassesSerializer
