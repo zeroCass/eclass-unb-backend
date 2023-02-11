@@ -38,3 +38,19 @@ class SubjectsViewSet(viewsets.ModelViewSet):
 class ClassesViewSet(viewsets.ModelViewSet):
     queryset = Classes.objects.all()
     serializer_class = ClassesSerializer
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+class MultipleQuestionViewSet(viewsets.ModelViewSet):
+    queryset = MultipleQuestion.objects.all()
+    serializer_class = MultipleQuestionSerializer
+
+class DiscursiveQuestionViewSet(viewsets.ModelViewSet):
+    queryset = DiscursiveQuestion.objects.all()
+    serializer_class = DiscursiveQuestionSerializer
+
+class ExamsViewSet(viewsets.ModelViewSet):
+    queryset = Exams.objects.all()
+    serializer_class = ExamsSerializer
