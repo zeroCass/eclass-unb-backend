@@ -11,7 +11,7 @@ class StudentsSerializer(serializers.ModelSerializer):
 class TeachersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = fieldsUser
+        fields = fieldsUser + ['specialization']
 
 class AdminsSerializer(serializers.ModelSerializer):
     class Meta:
