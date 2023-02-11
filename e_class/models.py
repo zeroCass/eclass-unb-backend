@@ -47,14 +47,14 @@ class Subject(models.Model):
 
     admin = models.ForeignKey(Admin, on_delete=models.SET_NULL, blank=True, null=True)
     teachers = models.ManyToManyField(Teacher)
-    course = models.CharField(max_length=45, unique=True)
+    name = models.CharField(max_length=45, unique=True)
     description = models.TextField(max_length=200)
 
     def __unicode__(self):
-        return self.course
+        return self.name
 
     class Meta:
-        ordering = ["course"]
+        ordering = ["name"]
 
 
 class Classes(models.Model):
