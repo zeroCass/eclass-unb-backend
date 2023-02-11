@@ -106,31 +106,22 @@ class MultipleQuestion(Question):
     
     answerChoices = ((1, "Option1"), (2, "Option2"), (3, "Option3"), (4, "Option4"))
     
-    id = models.AutoField(primary_key=True)
     option1 = models.TextField()
     option2 = models.TextField()
     option3 = models.TextField(null=True)
     option4 = models.TextField(null=True)
     answer = models.IntegerField(choices=answerChoices)
 
-    class Meta:
-        ordering = ["id"]
-
 
 class DiscursiveQuestion(models.Model):
     "Questão discursiva"
 
-    id = models.AutoField(primary_key=True)
-    answer = models.TextField(max_lenght="200", null=True)
-
-    class Meta:
-        ordering = ["id"]
+    answer = models.TextField(max_length="200", null=True)
 
 
 class Exams(models.Model):
     "Exame"
 
-    id = models.AutoField(primary_key=True)
     startAt = models.DateTimeField()
     endedAt = models.DateTimeField()
     isVisible = models.BooleanField()
@@ -140,5 +131,3 @@ class Exams(models.Model):
     students = models.ManyToManyField(Student)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
-    class Meta:
-        ordering = ["id"]
