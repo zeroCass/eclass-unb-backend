@@ -1,8 +1,5 @@
 from django.db import models  # type:ignore
 
-"""Modelos das tabelas do banco de dados"""
-
-
 class User(models.Model):
     "Usuário"
 
@@ -22,11 +19,15 @@ class User(models.Model):
 
 
 class Admin(User):
+    "Administrador"
+
     class Meta:
         ordering = ["name"]
 
 
 class Teacher(User):
+    "Professor"
+
     specialization = models.CharField(max_length=45)
 
     class Meta:
@@ -34,11 +35,15 @@ class Teacher(User):
 
 
 class Student(User):
+    "Estudante"
+
     class Meta:
         ordering = ["name"]
 
 
 class Subject(models.Model):
+    "Materia"
+
     admin = models.ForeignKey(Admin, on_delete=models.PROTECT)
     teachers = models.ManyToManyField(Teacher)
     course = models.CharField(max_length=45, unique=True)
@@ -50,7 +55,10 @@ class Subject(models.Model):
     class Meta:
         ordering = ["course"]
 
+
 class Classes(models.Model):
+    "Turma"
+
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     students = models.ManyToManyField(Student, through="Students_has_Classes")
     teachers = models.ManyToManyField(Teacher)
@@ -68,7 +76,10 @@ class Classes(models.Model):
     class Meta:
         ordering = ["name"]
 
+
 class Students_has_Classes(models.Model):
+    "Tabela intermedária entre Estudante e Turma"
+
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     classes = models.ForeignKey(Classes, on_delete=models.CASCADE)
     registerDate = models.DateField(auto_now_add=True)
