@@ -1,45 +1,45 @@
-from ..models import Subject
-from ..serializer import SubjectsSerializer, SubjectsSerializerEDIT
+from ..models import MultipleQuestion
+from ..serializer import MultipleQuestionSerializer, MultipleQuestionSerializerEDIT
 from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore
 from rest_framework.exceptions import NotFound #type: ignore
 
-class subjectsList(APIView):
+class multipleQuestionsList(APIView):
     def get(self, request):
-        subjects = Subject.objects.all()
-        serializer = SubjectsSerializer(subjects, many=True)
+        multipleQuestions = MultipleQuestion.objects.all()
+        serializer = MultipleQuestionSerializer(multipleQuestions, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = SubjectsSerializerEDIT(data=request.data)
+        serializer = MultipleQuestionSerializerEDIT(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class subjectsOne(APIView):
+class multipleQuestionsOne(APIView):
     def getObject(self, pk):
         try:
-            return Subject.objects.get(pk=pk)
-        except Subject.DoesNotExist:
+            return MultipleQuestion.objects.get(pk=pk)
+        except MultipleQuestion.DoesNotExist:
             raise NotFound()
     
     def get(self, request, pk):
-        subject = self.getObject(pk)
-        serializer = SubjectsSerializer(subject)
+        multipleQuestion = self.getObject(pk)
+        serializer = MultipleQuestionSerializer(multipleQuestion)
         return Response(serializer.data)
     
     def put(self, request, pk):
-        subject = self.getObject(pk)
-        serializer = SubjectsSerializerEDIT(subject, data=request.data)
+        multipleQuestion = self.getObject(pk)
+        serializer = MultipleQuestionSerializerEDIT(multipleQuestion, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk):
-        subject = self.getObject(pk)
-        serializer = SubjectsSerializer(subject)
-        subject.delete()
+        multipleQuestion = self.getObject(pk)
+        serializer = MultipleQuestionSerializer(multipleQuestion)
+        multipleQuestion.delete()
         return Response(serializer.data)

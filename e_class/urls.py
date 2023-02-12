@@ -5,6 +5,7 @@ from .views.view_admins import *
 from .views.view_auth import *
 from .views.view_subjects import *
 from .views.view_classes import *
+from .views.view_multipleQuestions import *
 # from rest_framework.routers import DefaultRouter #type:ignore
 
 urlpatterns = [
@@ -20,4 +21,6 @@ urlpatterns = [
     path('subject/<int:pk>/', subjectsOne.as_view()),
     path('classes/', classesList.as_view()),
     path('class/<int:pk>/', classesOne.as_view()),
+    path('multiple-questions/', multipleQuestionsList.as_view()),
+    path('multiple-question/<int:pk>/', multipleQuestionsOne.as_view()),
 ]

@@ -38,7 +38,7 @@ class classesOne(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, pk):
+    def delete(self, request, pk):
         classe = self.getObject(pk)
         serializer = ClassesSerializer(classe)
         classe.delete()

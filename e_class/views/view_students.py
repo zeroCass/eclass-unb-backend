@@ -44,7 +44,7 @@ class studentOne(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, pk):
+    def delete(self, request, pk):
         student = self.getObject(pk)
         serializer = StudentsSerializer(student)
         student.delete()
