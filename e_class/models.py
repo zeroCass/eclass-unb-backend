@@ -96,13 +96,17 @@ class Students_has_Classes(models.Model):
 class Question(models.Model):
     "Questões"
 
+    name = models.CharField(max_length=50)
     is_visibility = models.BooleanField(default=False)
     statement = models.TextField()
     students = models.ManyToManyField(Student)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
+    def __unicode__(self):
+        return self.name
+    
     class Meta:
-        ordering = ["statement"]
+        abstract = True
 
 
 class MultipleQuestion(Question):
@@ -118,21 +122,22 @@ class MultipleQuestion(Question):
     answer = models.IntegerField(choices=answerChoices)
 
     class Meta:
-        ordering = ["id"]
+        ordering = ["name"]
 
 
-class DiscursiveQuestion(models.Model):
+class DiscursiveQuestion(Question):
     "Questão discursiva"
 
     answer = models.TextField(max_length=200, blank=True)
 
     class Meta:
-        ordering = ["id"]
+        ordering = ["name"]
 
 
 class Exams(models.Model):
     "Exame"
 
+    name = models.CharField(max_length=50)
     startAt = models.DateTimeField()
     endedAt = models.DateTimeField()
     isVisible = models.BooleanField()
@@ -143,4 +148,4 @@ class Exams(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ["id"]
+        ordering = ["name"]

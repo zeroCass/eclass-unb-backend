@@ -28,22 +28,17 @@ class ClassesSerializer(serializers.ModelSerializer):
         model = Classes
         fields = ['id', 'subject', 'students', 'teachers', 'name', 'size', 'startTime', 'endTime', 'period', 'password', 'createdAt']
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Question
-        fields = ['is_visibility', 'statement', 'students', 'teacher']
-
 class MultipleQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = MultipleQuestion
-        fields = ['id', 'option1', 'option2', 'option3', 'option4', 'answer', 'is_visibility', 'statement', 'students', 'teacher']
+        fields = ['id', 'name', 'is_visibility', 'statement', 'students', 'teacher', 'option1', 'option2', 'option3', 'option4', 'answer']
 
 class DiscursiveQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = DiscursiveQuestion
-        fields = ['id', 'answer', 'is_visibility', 'statement', 'students', 'teacher']
+        fields = ['id', 'name', 'is_visibility', 'statement', 'students', 'teacher', 'answer']
 
 class ExamsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exams
-        fields = ['id', 'startAt', 'endedAt', 'isVisible', 'score', 'multipleQuestions', 'discursiveQuestions', 'students', 'teacher']
+        fields = ['id', 'name', 'startAt', 'endedAt', 'isVisible', 'score', 'multipleQuestions', 'discursiveQuestions', 'students', 'teacher']
