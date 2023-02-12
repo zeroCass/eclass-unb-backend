@@ -117,18 +117,18 @@ class Migration(migrations.Migration):
                 "ordering": ["name"],
             },
         ),
-        migrations.RemoveField(
-            model_name="students",
-            name="Users_registrationID",
-        ),
-        migrations.RemoveField(
-            model_name="subjects",
-            name="Admins_Users_registrationID",
-        ),
-        migrations.RemoveField(
-            model_name="teachers",
-            name="Users_registrationID",
-        ),
+        # migrations.RemoveField(
+        #     model_name="students",
+        #     name="Users_registrationID",
+        # ),
+        # migrations.RemoveField(
+        #     model_name="subjects",
+        #     name="Admins_Users_registrationID",
+        # ),
+        # migrations.RemoveField(
+        #     model_name="teachers",
+        #     name="Users_registrationID",
+        # ),
         migrations.DeleteModel(
             name="Admins",
         ),
