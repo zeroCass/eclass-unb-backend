@@ -154,7 +154,8 @@ class Exams(models.Model):
         DiscursiveQuestion, related_name="exams"
     )
     students = models.ManyToManyField(Student)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="exams")
+    classe = models.ForeignKey(Classes, on_delete=models.PROTECT, related_name="exams")
 
     def __unicode__(self):
         return self.name
