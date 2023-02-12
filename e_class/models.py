@@ -49,8 +49,9 @@ class Subject(models.Model):
         Admin,
         on_delete=models.SET_NULL,
         blank=True,
-        null=True)
-    teachers = models.ManyToManyField(Teacher)
+        null=True,
+        related_name="subjects")
+    teachers = models.ManyToManyField(Teacher, related_name="subjects")
     name = models.CharField(max_length=45, unique=True)
     description = models.TextField(max_length=200)
 
@@ -64,9 +65,9 @@ class Subject(models.Model):
 class Classes(models.Model):
     "Turma"
 
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    students = models.ManyToManyField(Student, through="Students_has_Classes")
-    teachers = models.ManyToManyField(Teacher)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="classes")
+    students = models.ManyToManyField(Student, through="Students_has_Classes", related_name="classes")
+    teachers = models.ManyToManyField(Teacher, related_name="classes")
     name = models.CharField(max_length=15)
     size = models.IntegerField()
     startTime = models.DateTimeField(blank=True, null=True)
@@ -142,8 +143,8 @@ class Exams(models.Model):
     endedAt = models.DateTimeField()
     isVisible = models.BooleanField()
     score = models.FloatField()
-    multipleQuestions = models.ManyToManyField(MultipleQuestion)
-    discursiveQuestions = models.ManyToManyField(DiscursiveQuestion)
+    multipleQuestions = models.ManyToManyField(MultipleQuestion, related_name="exams")
+    discursiveQuestions = models.ManyToManyField(DiscursiveQuestion, related_name="exams")
     students = models.ManyToManyField(Student)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
