@@ -25,7 +25,7 @@ class subjectsOne(APIView):
         except Subject.DoesNotExist:
             raise NotFound()
     
-    def get(self, pk):
+    def get(self, request, pk):
         subject = self.getObject(pk)
         serializer = SubjectsSerializer(subject)
         return Response(serializer.data)

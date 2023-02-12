@@ -31,7 +31,7 @@ class studentOne(APIView):
         except Student.DoesNotExist:
             raise NotFound()
     
-    def get(self, pk):
+    def get(self, request, pk):
         student = self.getObject(pk)
         serializer = StudentsSerializer(student)
         return Response(serializer.data)
