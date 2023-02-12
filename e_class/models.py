@@ -45,7 +45,11 @@ class Student(User):
 class Subject(models.Model):
     "Materia"
 
-    admin = models.ForeignKey(Admin, on_delete=models.SET_NULL, blank=True, null=True)
+    admin = models.ForeignKey(
+        Admin,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True)
     teachers = models.ManyToManyField(Teacher)
     name = models.CharField(max_length=45, unique=True)
     description = models.TextField(max_length=200)
@@ -87,3 +91,56 @@ class Students_has_Classes(models.Model):
 
     class Meta:
         ordering = ["registerDate"]
+
+
+class Question(models.Model):
+    "Questões"
+
+    is_visibility = models.BooleanField(default=False)
+    statement = models.TextField()
+    students = models.ManyToManyField(Student)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ["statement"]
+
+
+class MultipleQuestion(Question):
+    "Questão múltipla escolha"
+
+    answerChoices = ((1, "Option1"), (2, "Option2"),
+                     (3, "Option3"), (4, "Option4"))
+
+    option1 = models.TextField()
+    option2 = models.TextField()
+    option3 = models.TextField(blank=True)
+    option4 = models.TextField(blank=True)
+    answer = models.IntegerField(choices=answerChoices)
+
+    class Meta:
+        ordering = ["id"]
+
+
+class DiscursiveQuestion(models.Model):
+    "Questão discursiva"
+
+    answer = models.TextField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ["id"]
+
+
+class Exams(models.Model):
+    "Exame"
+
+    startAt = models.DateTimeField()
+    endedAt = models.DateTimeField()
+    isVisible = models.BooleanField()
+    score = models.FloatField()
+    multipleQuestions = models.ManyToManyField(MultipleQuestion)
+    discursiveQuestions = models.ManyToManyField(DiscursiveQuestion)
+    students = models.ManyToManyField(Student)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ["id"]
