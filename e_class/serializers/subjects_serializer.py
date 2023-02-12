@@ -1,11 +1,11 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
-from .teachers_serializer import TeachersSerializer
+from .teachers_serializer import TeachersSerializerByClass
 # from .classes_serializer import ClassesSerializer
 
 
 class SubjectsSerializer(serializers.ModelSerializer):
-    teachers = TeachersSerializer(many=True)
+    teachers = TeachersSerializerByClass(many=True)
     # classes = ClassesSerializer(many=True)
 
     class Meta:
@@ -25,6 +25,9 @@ class SubjectsSerializerEDIT(serializers.ModelSerializer):
             "description": {
                 "required": False,
             },
+            "classes": {
+                "required": False,
+            },
         }
         model = Subject
-        fields = ["id", "teachers", "name", "description"]
+        fields = ["id", "teachers", "name", "description", "classes"]

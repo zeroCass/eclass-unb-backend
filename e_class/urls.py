@@ -7,6 +7,7 @@ from .views.view_subjects import *
 from .views.view_classes import *
 from .views.view_multipleQuestions import *
 from .views.views_discursiveQuestions import *
+from .views.view_exams import *
 # from rest_framework.routers import DefaultRouter #type:ignore
 
 urlpatterns = [
@@ -26,4 +27,6 @@ urlpatterns = [
     path('multiple-question/<int:pk>/', multipleQuestionsOne.as_view()),
     path('discursive-questions/', discursiveQuestionsList.as_view()),
     path('discursive-question/<int:pk>/', discursiveQuestionsOne.as_view()),
+    path('exams/', examsList.as_view()),
+    path('exam/<int:pk>/', examsOne.as_view()),
 ]

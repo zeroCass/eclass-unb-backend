@@ -65,9 +65,7 @@ class Classes(models.Model):
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE, related_name="classes"
     )
-    students = models.ManyToManyField(
-        Student, through="Students_has_Classes", related_name="classes"
-    )
+    students = models.ManyToManyField(Student, related_name="classes")
     teachers = models.ManyToManyField(Teacher, related_name="classes")
     name = models.CharField(max_length=15)
     size = models.IntegerField()
@@ -82,17 +80,6 @@ class Classes(models.Model):
 
     class Meta:
         ordering = ["name"]
-
-
-class Students_has_Classes(models.Model):
-    "Tabela intermedária entre Estudante e Turma"
-
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    classes = models.ForeignKey(Classes, on_delete=models.CASCADE)
-    registerDate = models.DateField(auto_now_add=True)
-
-    class Meta:
-        ordering = ["registerDate"]
 
 
 class Question(models.Model):
@@ -116,8 +103,8 @@ class MultipleQuestion(Question):
 
     option1 = models.TextField()
     option2 = models.TextField()
-    option3 = models.TextField(blank=True)
-    option4 = models.TextField(blank=True)
+    option3 = models.TextField(blank=True, null=True)
+    option4 = models.TextField(blank=True, null=True)
     answer = models.IntegerField(choices=answerChoices)
     students = models.ManyToManyField(Student, related_name="multipleQuestions")
     teacher = models.ForeignKey(
@@ -145,8 +132,8 @@ class Exams(models.Model):
     "Exame"
 
     name = models.CharField(max_length=50)
-    startAt = models.DateTimeField()
-    endedAt = models.DateTimeField()
+    startAt = models.DateTimeField(blank=True, null=True)
+    endedAt = models.DateTimeField(blank=True, null=True)
     isVisible = models.BooleanField()
     score = models.FloatField()
     multipleQuestions = models.ManyToManyField(MultipleQuestion, related_name="exams")
@@ -154,7 +141,8 @@ class Exams(models.Model):
         DiscursiveQuestion, related_name="exams"
     )
     students = models.ManyToManyField(Student)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="exams")
+    classe = models.ForeignKey(Classes, on_delete=models.PROTECT, related_name="exams")
 
     def __unicode__(self):
         return self.name

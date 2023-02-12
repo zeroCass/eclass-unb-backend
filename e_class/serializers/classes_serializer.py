@@ -2,13 +2,15 @@ from rest_framework import serializers  # type:ignore
 from ..models import *
 from .subjects_serializer import SubjectsSerializer
 # from .students_serializer import StudentsSerializer
-from .teachers_serializer import TeachersSerializer
+from .teachers_serializer import TeachersSerializerByClass
+from .exams_serializer import ExamsSerializer
 
 
 class ClassesSerializer(serializers.ModelSerializer):
     subject = SubjectsSerializer()
     # students = StudentsSerializer(many=True)
-    teachers = TeachersSerializer(many=True)
+    teachers = TeachersSerializerByClass(many=True)
+    exams = ExamsSerializer(many=True)
 
     class Meta:
         model = Classes
@@ -24,6 +26,7 @@ class ClassesSerializer(serializers.ModelSerializer):
             "period",
             "password",
             "createdAt",
+            "exams",
         ]
 
 
@@ -60,6 +63,9 @@ class ClassesSerializerEDIT(serializers.ModelSerializer):
             "createdAt": {
                 "required": False,
             },
+            "exams": {
+                "required": False,
+            },
         }
         model = Classes
         fields = [
@@ -74,4 +80,5 @@ class ClassesSerializerEDIT(serializers.ModelSerializer):
             "period",
             "password",
             "createdAt",
+            "exams",
         ]
