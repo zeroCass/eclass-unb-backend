@@ -4,7 +4,9 @@ from rest_framework.views import APIView  # type: ignore
 from rest_framework.authtoken.models import Token  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
 from ..models import Student, Teacher, Admin
-from ..serializer import StudentsSerializer, TeachersSerializer, AdminsSerializer
+from ..serializers.students_serializer import StudentsSerializer
+from ..serializers.teachers_serializer import TeachersSerializer
+from ..serializers.admins_serializer import AdminsSerializer
 
 
 class login(APIView):

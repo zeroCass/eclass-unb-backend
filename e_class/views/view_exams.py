@@ -1,5 +1,5 @@
 from ..models import Exams
-from ..serializer import ExamsSerializer, ExamsSerializerEDIT
+from ..serializers.exams_serializer import ExamsSerializer, ExamsSerializerEDIT
 from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore

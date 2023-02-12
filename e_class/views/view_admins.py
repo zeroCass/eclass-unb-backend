@@ -1,5 +1,5 @@
 from ..models import Admin
-from ..serializer import AdminsSerializer, AdminsSerializerEDIT
+from ..serializers.admins_serializer import AdminsSerializer, AdminsSerializerEDIT
 from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore

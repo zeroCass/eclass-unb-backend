@@ -1,7 +1,7 @@
 import json
 from django.test import TestCase #type:ignore
 from ...models import Student #type:ignore
-from ...serializer import StudentsSerializer, StudentsSerializerEDIT
+from ...serializers.students_serializer import StudentsSerializer, StudentsSerializerEDIT
 from ...views.view_students import studentOne, studentsList
 from ...urls import *
 from django.urls import reverse #type: ignore

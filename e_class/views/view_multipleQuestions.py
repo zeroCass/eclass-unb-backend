@@ -1,5 +1,5 @@
 from ..models import MultipleQuestion
-from ..serializer import MultipleQuestionSerializer, MultipleQuestionSerializerEDIT
+from ..serializers.questions_serializer import MultipleQuestionSerializer, MultipleQuestionSerializerEDIT
 from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore

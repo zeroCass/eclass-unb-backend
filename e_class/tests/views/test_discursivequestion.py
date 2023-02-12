@@ -1,7 +1,7 @@
 import json
 from django.test import TestCase #type:ignore
 from e_class.models import DiscursiveQuestion, Teacher #type:ignore
-from e_class.serializer import DiscursiveQuestionSerializer
+from ...serializers.questions_serializer import DiscursiveQuestionSerializer
 from django.urls import reverse #type:ignore
 from rest_framework import status #type:ignore
 
