@@ -22,10 +22,6 @@ class ClassesViewSet(viewsets.ModelViewSet):
     queryset = Classes.objects.all()
     serializer_class = ClassesSerializer
 
-class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
-
 class MultipleQuestionViewSet(viewsets.ModelViewSet):
     queryset = MultipleQuestion.objects.all()
     serializer_class = MultipleQuestionSerializer
