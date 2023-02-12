@@ -4,6 +4,7 @@ from rest_framework.views import APIView  # type: ignore
 from rest_framework.authtoken.models import Token  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
 from ..models import Student, Teacher, Admin
+from ..serializer import StudentsSerializer, TeachersSerializer, AdminsSerializer
 
 
 class login(APIView):
@@ -20,18 +21,25 @@ class login(APIView):
             user = User.objects.get(email=email)
             if password == user.password:
                 try:
-                    Student.objects.get(email=email)
+                    student = Student.objects.get(email=email)
+                    serializer = StudentsSerializer(student)
                 except:
                     pass
                 try:
-                    Teacher.objects.get(email=email)
+                    teacher = Teacher.objects.get(email=email)
+                    serializer = TeachersSerializer(teacher)
                 except:
-                    Admin.objects.get(email=email)
+                    pass
+                try:
+                    admin = Admin.objects.get(email=email)
+                    serializer = AdminsSerializer(admin)
+                except:
+                    pass
                 try:
                     token = Token.objects.get(user=user)
                 except:
                     token = Token.objects.create(user=user)
-                return Response({"token": token.key, "user_id": token.user_id})
+                return Response({"token": token.key, "user": serializer.data})
             return Response(status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
