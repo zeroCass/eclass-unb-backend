@@ -32,6 +32,14 @@ class TeachersSerializer(serializers.ModelSerializer):
 
 class TeachersSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "name": {"required": False,},
+            "email": {"required": False,},
+            "password": {"required": False,},
+            "cpf": {"required": False,},
+            "userType": {"required": False,},
+            "specialization": {"required": False,},
+        }
         model = Teacher
         fields = fieldsUserEDIT + ["specialization"]
 
@@ -44,6 +52,13 @@ class AdminsSerializer(serializers.ModelSerializer):
 
 class AdminsSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "name": {"required": False,},
+            "email": {"required": False,},
+            "password": {"required": False,},
+            "cpf": {"required": False,},
+            "userType": {"required": False,},
+        }
         model = Admin
         fields = fieldsUserEDIT
 
@@ -58,8 +73,13 @@ class SubjectsSerializer(serializers.ModelSerializer):
 
 class SubjectsSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "teachers": {"required": False,},
+            "name": {"required": False,},
+            "description": {"required": False,},
+        }
         model = Subject
-        fields = ["id", "teachers", "course", "description"]
+        fields = ["id", "teachers", "name", "description"]
 
 
 class ClassesSerializer(serializers.ModelSerializer):
@@ -86,6 +106,18 @@ class ClassesSerializer(serializers.ModelSerializer):
 
 class ClassesSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "subject": {"required": False,},
+            "students": {"required": False,},
+            "teachers": {"required": False,},
+            "name": {"required": False,},
+            "size": {"required": False,},
+            "startTime": {"required": False,},
+            "endTime": {"required": False,},
+            "period": {"required": False,},
+            "password": {"required": False,},
+            "createdAt": {"required": False,},
+        }
         model = Classes
         fields = [
             "id",
@@ -125,6 +157,18 @@ class MultipleQuestionSerializer(serializers.ModelSerializer):
 
 class MultipleQuestionSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "name": {"required": False,},
+            "is_visibility": {"required": False,},
+            "statement": {"required": False,},
+            "students": {"required": False,},
+            "teacher": {"required": False,},
+            "option1": {"required": False,},
+            "option2": {"required": False,},
+            "option3": {"required": False,},
+            "option4": {"required": False,},
+            "answer": {"required": False,},
+        }
         model = MultipleQuestion
         fields = [
             "id",
@@ -160,6 +204,14 @@ class DiscursiveQuestionSerializer(serializers.ModelSerializer):
 
 class DiscursiveQuestionSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "name": {"required": False,},
+            "is_visibility": {"required": False,},
+            "statement": {"required": False,},
+            "students": {"required": False,},
+            "teacher": {"required": False,},
+            "answer": {"required": False,},
+        }
         model = DiscursiveQuestion
         fields = [
             "id",
@@ -196,6 +248,17 @@ class ExamsSerializer(serializers.ModelSerializer):
 
 class ExamsSerializerEDIT(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            "name": {"required": False,},
+            "startAt": {"required": False,},
+            "endedAt": {"required": False,},
+            "isVisible": {"required": False,},
+            "score": {"required": False,},
+            "multipleQuestions": {"required": False,},
+            "discursiveQuestions": {"required": False,},
+            "students": {"required": False,},
+            "teacher": {"required": False,},
+        }
         model = Exams
         fields = [
             "id",
