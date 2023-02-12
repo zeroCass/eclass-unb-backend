@@ -2,8 +2,8 @@ import json
 from django.test import TestCase #type:ignore
 from e_class.models import DiscursiveQuestion, Teacher #type:ignore
 from e_class.serializer import DiscursiveQuestionSerializer
-from django.urls import reverse
-from rest_framework import status
+from django.urls import reverse #type:ignore
+from rest_framework import status #type:ignore
 
 question = DiscursiveQuestion()
 class DiscursiveQuestionViewTest(TestCase):

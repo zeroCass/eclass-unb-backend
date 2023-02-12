@@ -2,8 +2,8 @@ import json
 from django.test import TestCase #type:ignore
 from e_class.models import MultipleQuestion, Teacher #type:ignore
 from e_class.serializer import MultipleQuestionSerializer
-from django.urls import reverse
-from rest_framework import status
+from django.urls import reverse #type:ignore
+from rest_framework import status #type:ignore
 
 question = MultipleQuestion()
 class MultipleQuestionViewTest(TestCase):
