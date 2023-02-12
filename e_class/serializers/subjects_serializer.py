@@ -1,11 +1,11 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
-from .teachers_serializer import TeachersSerializer
+from .teachers_serializer import TeachersSerializerByClass
 # from .classes_serializer import ClassesSerializer
 
 
 class SubjectsSerializer(serializers.ModelSerializer):
-    teachers = TeachersSerializer(many=True)
+    teachers = TeachersSerializerByClass(many=True)
     # classes = ClassesSerializer(many=True)
 
     class Meta:

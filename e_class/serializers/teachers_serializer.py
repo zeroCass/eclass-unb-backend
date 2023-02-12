@@ -1,8 +1,5 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
-
-# from .subjects_serializer import SubjectsSerializer
-# from .classes_serializer import ClassesSerializer
 from .questions_serializer import (
     MultipleQuestionSerializer,
     DiscursiveQuestionSerializer,
@@ -10,9 +7,23 @@ from .questions_serializer import (
 from .exams_serializer import ExamsSerializer
 
 
+class TeachersSerializerByClass(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = [
+            "id",
+            "name",
+            "email",
+            "cpf",
+            "password",
+            "userType",
+            "specialization",
+            "subjects",
+            "classes",
+        ]
+
+
 class TeachersSerializer(serializers.ModelSerializer):
-    # subjects = SubjectsSerializer(many=True)
-    # classes = ClassesSerializer(many=True)
     multipleQuestions = MultipleQuestionSerializer(many=True)
     discursiveQuestions = DiscursiveQuestionSerializer(many=True)
     exams = ExamsSerializer(many=True)

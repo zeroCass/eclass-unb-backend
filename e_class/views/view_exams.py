@@ -5,7 +5,7 @@ from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore
 from rest_framework.exceptions import NotFound #type: ignore
 
-class ExamsList(APIView):
+class examsList(APIView):
     def get(self, request):
         exams = Exams.objects.all()
         serializer = ExamsSerializer(exams, many=True)
