@@ -147,5 +147,8 @@ class Exams(models.Model):
     students = models.ManyToManyField(Student)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
+    def __unicode__(self):
+        return self.name
+    
     class Meta:
         ordering = ["name"]

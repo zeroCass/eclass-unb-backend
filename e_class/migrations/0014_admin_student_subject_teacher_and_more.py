@@ -117,21 +117,6 @@ class Migration(migrations.Migration):
                 "ordering": ["name"],
             },
         ),
-<<<<<<< HEAD
-=======
-        # migrations.RemoveField(
-        #     model_name="students",
-        #     name="Users_registrationID",
-        # ),
-        # migrations.RemoveField(
-        #     model_name="subjects",
-        #     name="Admins_Users_registrationID",
-        # ),
-        # migrations.RemoveField(
-        #     model_name="teachers",
-        #     name="Users_registrationID",
-        # ),
->>>>>>> main
         migrations.DeleteModel(
             name="Admins",
         ),
