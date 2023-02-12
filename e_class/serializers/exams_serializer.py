@@ -1,13 +1,13 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
-# from .questions_serializer import MultipleQuestionSerializer, DiscursiveQuestionSerializer
+from .questions_serializer import MultipleQuestionSerializer, DiscursiveQuestionSerializer
 # from .students_serializer import StudentsSerializer
 # from .teachers_serializer import TeachersSerializer
 
 
 class ExamsSerializer(serializers.ModelSerializer):
-    # multipleQuestions = MultipleQuestionSerializer(many=True)
-    # discursiveQuestions = DiscursiveQuestionSerializer(many=True)
+    multipleQuestions = MultipleQuestionSerializer(many=True)
+    discursiveQuestions = DiscursiveQuestionSerializer(many=True)
     # students = StudentsSerializer(many=True)
     # teacher = TeachersSerializer()
 
@@ -24,6 +24,7 @@ class ExamsSerializer(serializers.ModelSerializer):
             "discursiveQuestions",
             "students",
             "teacher",
+            "classe",
         ]
 
 

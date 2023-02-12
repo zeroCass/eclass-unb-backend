@@ -3,6 +3,7 @@ from ..models import *
 # from .subjects_serializer import SubjectsSerializer
 # from .classes_serializer import ClassesSerializer
 from .questions_serializer import MultipleQuestionSerializer, DiscursiveQuestionSerializer
+from .exams_serializer import ExamsSerializer
 
 
 class TeachersSerializer(serializers.ModelSerializer):
@@ -10,15 +11,21 @@ class TeachersSerializer(serializers.ModelSerializer):
     # classes = ClassesSerializer(many=True)
     multipleQuestions = MultipleQuestionSerializer(many=True)
     discursiveQuestions = DiscursiveQuestionSerializer(many=True)
+    exams = ExamsSerializer(many=True)
 
     class Meta:
         model = Teacher
-        fields = ["id", "name", "email", "cpf", "userType",
+        fields = ["id", 
+            "name", 
+            "email", 
+            "cpf", 
+            "userType",
             "specialization",
             "subjects",
             "classes",
             "multipleQuestions",
             "discursiveQuestions",
+            "exams",
         ]
 
 
