@@ -1,8 +1,12 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
+
 # from .subjects_serializer import SubjectsSerializer
 # from .classes_serializer import ClassesSerializer
-from .questions_serializer import MultipleQuestionSerializer, DiscursiveQuestionSerializer
+from .questions_serializer import (
+    MultipleQuestionSerializer,
+    DiscursiveQuestionSerializer,
+)
 from .exams_serializer import ExamsSerializer
 
 
@@ -15,10 +19,12 @@ class TeachersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Teacher
-        fields = ["id", 
-            "name", 
-            "email", 
-            "cpf", 
+        fields = [
+            "id",
+            "name",
+            "email",
+            "cpf",
+            "password",
             "userType",
             "specialization",
             "subjects",
@@ -38,10 +44,10 @@ class TeachersSerializerEDIT(serializers.ModelSerializer):
             "email": {
                 "required": False,
             },
-            "password": {
+            "cpf": {
                 "required": False,
             },
-            "cpf": {
+            "password": {
                 "required": False,
             },
             "userType": {
@@ -50,6 +56,34 @@ class TeachersSerializerEDIT(serializers.ModelSerializer):
             "specialization": {
                 "required": False,
             },
+            "subjects": {
+                "required": False,
+            },
+            "classes": {
+                "required": False,
+            },
+            "multipleQuestions": {
+                "required": False,
+            },
+            "discursiveQuestions": {
+                "required": False,
+            },
+            "exams": {
+                "required": False,
+            },
         }
         model = Teacher
-        fields = ["id", "name", "email", "password", "cpf", "userType", "specialization"]
+        fields = [
+            "id",
+            "name",
+            "email",
+            "cpf",
+            "password",
+            "userType",
+            "specialization",
+            "subjects",
+            "classes",
+            "multipleQuestions",
+            "discursiveQuestions",
+            "exams",
+        ]

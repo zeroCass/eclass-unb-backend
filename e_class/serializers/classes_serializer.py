@@ -63,6 +63,9 @@ class ClassesSerializerEDIT(serializers.ModelSerializer):
             "createdAt": {
                 "required": False,
             },
+            "exams": {
+                "required": False,
+            },
         }
         model = Classes
         fields = [
@@ -77,4 +80,5 @@ class ClassesSerializerEDIT(serializers.ModelSerializer):
             "period",
             "password",
             "createdAt",
+            "exams",
         ]

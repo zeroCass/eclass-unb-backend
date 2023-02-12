@@ -18,6 +18,7 @@ class StudentsSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "email",
+            "password",
             "cpf",
             "userType",
             "classes",
@@ -44,6 +45,25 @@ class StudentsSerializerEDIT(serializers.ModelSerializer):
             "userType": {
                 "required": False,
             },
+            "classes": {
+                "required": False,
+            },
+            "multipleQuestions": {
+                "required": False,
+            },
+            "discursiveQuestions": {
+                "required": False,
+            },
         }
         model = Student
-        fields = ["id", "name", "email", "password", "cpf", "userType"]
+        fields = [
+            "id",
+            "name",
+            "email",
+            "password",
+            "cpf",
+            "userType",
+            "classes",
+            "multipleQuestions",
+            "discursiveQuestions",
+        ]

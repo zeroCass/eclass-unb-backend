@@ -25,6 +25,9 @@ class SubjectsSerializerEDIT(serializers.ModelSerializer):
             "description": {
                 "required": False,
             },
+            "classes": {
+                "required": False,
+            },
         }
         model = Subject
-        fields = ["id", "teachers", "name", "description"]
+        fields = ["id", "teachers", "name", "description", "classes"]

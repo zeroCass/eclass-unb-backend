@@ -1,5 +1,6 @@
 from rest_framework import serializers  # type:ignore
 from ..models import *
+
 # from .subjects_serializer import SubjectsSerializer
 
 
@@ -8,7 +9,7 @@ class AdminsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Admin
-        fields = ["id", "name", "email", "cpf", "userType", "subjects"]
+        fields = ["id", "name", "password", "email", "cpf", "userType", "subjects"]
 
 
 class AdminsSerializerEDIT(serializers.ModelSerializer):
@@ -29,6 +30,9 @@ class AdminsSerializerEDIT(serializers.ModelSerializer):
             "userType": {
                 "required": False,
             },
+            "subjects": {
+                "required": False,
+            },
         }
         model = Admin
-        fields = ["id", "name", "email", "password", "cpf", "userType"]
+        fields = ["id", "name", "email", "password", "cpf", "userType", "subjects"]

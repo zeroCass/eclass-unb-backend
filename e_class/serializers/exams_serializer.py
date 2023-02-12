@@ -58,6 +58,9 @@ class ExamsSerializerEDIT(serializers.ModelSerializer):
             "teacher": {
                 "required": False,
             },
+            "classe": {
+                "required": False,
+            },
         }
         model = Exams
         fields = [
@@ -71,4 +74,5 @@ class ExamsSerializerEDIT(serializers.ModelSerializer):
             "discursiveQuestions",
             "students",
             "teacher",
+            "classe",
         ]
