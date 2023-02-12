@@ -6,7 +6,7 @@ from rest_framework.views import APIView #type: ignore
 from rest_framework.exceptions import NotFound #type: ignore
 
 class studentsList(APIView):
-    def get(self, request):
+    def get(self):
         students = Student.objects.all()
         serializer = StudentsSerializer(students, many=True)
         return Response(serializer.data)
@@ -25,7 +25,7 @@ class studentOne(APIView):
         except Student.DoesNotExist:
             raise NotFound()
     
-    def get(self, request, pk):
+    def get(self, pk):
         student = self.getObject(pk)
         serializer = StudentsSerializer(student)
         return Response(serializer.data)
@@ -38,7 +38,7 @@ class studentOne(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk):
+    def delete(self, pk):
         student = self.getObject(pk)
         serializer = StudentsSerializer(student)
         student.delete()
