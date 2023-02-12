@@ -4,6 +4,7 @@ from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore
 from rest_framework.exceptions import NotFound #type: ignore
+from django.contrib.auth.models import User  # type: ignore
 
 class teachersList(APIView):
     def get(self, request):
@@ -14,6 +15,11 @@ class teachersList(APIView):
     def post(self, request):
         serializer = TeachersSerializerEDIT(data=request.data)
         if serializer.is_valid():
+            User.objects.create(
+                username=request.data["name"],
+                email=request.data["email"],
+                password=request.data["password"],
+            )
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
