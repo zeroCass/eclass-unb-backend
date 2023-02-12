@@ -19,5 +19,4 @@ from rest_framework.authtoken.views import obtain_auth_token #type:ignore
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('e_class.urls')),
-    path('auth/', obtain_auth_token),
 ]
