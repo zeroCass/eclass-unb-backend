@@ -1,5 +1,5 @@
 from ..models import Classes
-from ..serializer import ClassesSerializer, ClassesSerializerEDIT
+from ..serializers.classes_serializer import ClassesSerializer, ClassesSerializerEDIT
 from rest_framework import status #type: ignore
 from rest_framework.response import Response #type: ignore
 from rest_framework.views import APIView #type: ignore
