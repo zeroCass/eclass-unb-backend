@@ -14,6 +14,7 @@ class adminsList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        request.data["userType"] = 1
         serializer = AdminsSerializerEDIT(data=request.data)
         if serializer.is_valid():
             User.objects.create(
@@ -38,6 +39,7 @@ class adminOne(APIView):
         return Response(serializer.data)
     
     def put(self, request, pk):
+        request.data["userType"] = 1
         student = self.getObject(pk)
         serializer = AdminsSerializerEDIT(student, data=request.data)
         if serializer.is_valid():

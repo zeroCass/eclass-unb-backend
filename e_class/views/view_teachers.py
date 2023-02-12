@@ -14,6 +14,7 @@ class teachersList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        request.data["userType"] = 2
         serializer = TeachersSerializerEDIT(data=request.data)
         if serializer.is_valid():
             User.objects.create(
@@ -38,6 +39,7 @@ class teacherOne(APIView):
         return Response(serializer.data)
     
     def put(self, request, pk):
+        request.data["userType"] = 2
         student = self.getObject(pk)
         serializer = TeachersSerializerEDIT(student, data=request.data)
         if serializer.is_valid():

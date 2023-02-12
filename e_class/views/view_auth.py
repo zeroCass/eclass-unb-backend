@@ -3,6 +3,7 @@ from rest_framework.response import Response  # type: ignore
 from rest_framework.views import APIView  # type: ignore
 from rest_framework.authtoken.models import Token  # type: ignore
 from django.contrib.auth.models import User  # type: ignore
+from ..models import Student, Teacher, Admin
 
 
 class login(APIView):
@@ -18,6 +19,14 @@ class login(APIView):
             password = request.data["password"]
             user = User.objects.get(email=email)
             if password == user.password:
+                try:
+                    Student.objects.get(email=email)
+                except:
+                    pass
+                try:
+                    Teacher.objects.get(email=email)
+                except:
+                    Admin.objects.get(email=email)
                 try:
                     token = Token.objects.get(user=user)
                 except:

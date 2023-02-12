@@ -13,6 +13,7 @@ class studentsList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        request.data["userType"] = 3
         serializer = StudentsSerializerEDIT(data=request.data)
         if serializer.is_valid():
             User.objects.create(
@@ -37,6 +38,7 @@ class studentOne(APIView):
         return Response(serializer.data)
     
     def put(self, request, pk):
+        request.data["userType"] = 3
         student = self.getObject(pk)
         serializer = StudentsSerializerEDIT(student, data=request.data)
         if serializer.is_valid():
