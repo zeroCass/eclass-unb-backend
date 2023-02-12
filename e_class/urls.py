@@ -4,6 +4,7 @@ from .views.view_teachers import *
 from .views.view_admins import *
 from .views.view_auth import *
 from .views.view_subjects import *
+from .views.view_classes import *
 # from rest_framework.routers import DefaultRouter #type:ignore
 
 urlpatterns = [
@@ -17,4 +18,6 @@ urlpatterns = [
     path('logout/', logout.as_view()),
     path('subjects/', subjectsList.as_view()),
     path('subject/<int:pk>/', subjectsOne.as_view()),
+    path('classes/', classesList.as_view()),
+    path('class/<int:pk>/', classesOne.as_view()),
 ]
