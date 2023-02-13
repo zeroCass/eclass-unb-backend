@@ -48,7 +48,7 @@ class Subject(models.Model):
     admin = models.ForeignKey(
         Admin, on_delete=models.SET_NULL, blank=True, null=True, related_name="subjects"
     )
-    teachers = models.ManyToManyField(Teacher, related_name="subjects")
+    teachers = models.ManyToManyField(Teacher, related_name="subjects", blank=True, null=True)
     name = models.CharField(max_length=45, unique=True)
     description = models.TextField(max_length=200)
 
@@ -65,14 +65,14 @@ class Classes(models.Model):
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE, related_name="classes"
     )
-    students = models.ManyToManyField(Student, related_name="classes")
-    teachers = models.ManyToManyField(Teacher, related_name="classes")
+    students = models.ManyToManyField(Student, related_name="classes", blank=True)
+    teachers = models.ManyToManyField(Teacher, related_name="classes", blank=True)
     name = models.CharField(max_length=15)
     size = models.IntegerField()
     startTime = models.DateTimeField(blank=True, null=True)
     endTime = models.DateTimeField(blank=True, null=True)
     period = models.IntegerField()
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=30, blank=True, null=True)
     createdAt = models.DateField(auto_now_add=True)
 
     def __unicode__(self):
@@ -85,7 +85,7 @@ class Classes(models.Model):
 class Question(models.Model):
     "Questões"
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True)
     is_visibility = models.BooleanField(default=False)
     statement = models.TextField()
 
@@ -106,7 +106,7 @@ class MultipleQuestion(Question):
     option3 = models.TextField(blank=True, null=True)
     option4 = models.TextField(blank=True, null=True)
     answer = models.IntegerField(choices=answerChoices)
-    students = models.ManyToManyField(Student, related_name="multipleQuestions")
+    students = models.ManyToManyField(Student, related_name="multipleQuestions", blank=True)
     teacher = models.ForeignKey(
         Teacher, on_delete=models.CASCADE, related_name="multipleQuestions"
     )
@@ -119,7 +119,7 @@ class DiscursiveQuestion(Question):
     "Questão discursiva"
 
     answer = models.TextField(max_length=200, blank=True)
-    students = models.ManyToManyField(Student, related_name="discursiveQuestions")
+    students = models.ManyToManyField(Student, related_name="discursiveQuestions", blank=True)
     teacher = models.ForeignKey(
         Teacher, on_delete=models.CASCADE, related_name="discursiveQuestions"
     )
@@ -136,11 +136,11 @@ class Exams(models.Model):
     endedAt = models.DateTimeField(blank=True, null=True)
     isVisible = models.BooleanField()
     score = models.FloatField()
-    multipleQuestions = models.ManyToManyField(MultipleQuestion, related_name="exams")
+    multipleQuestions = models.ManyToManyField(MultipleQuestion, related_name="exams", blank=True)
     discursiveQuestions = models.ManyToManyField(
-        DiscursiveQuestion, related_name="exams"
+        DiscursiveQuestion, related_name="exams", blank=True
     )
-    students = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="exams")
     classe = models.ForeignKey(Classes, on_delete=models.PROTECT, related_name="exams")
 
