@@ -14,3 +14,5 @@ Execute o seguinte comando para iniciar o servidor
 ```bash
 python manage.py runserver
 ```
+#Como acessar a documentação
+Abra o arquivo docs/_build/html/index.html em um navegador
